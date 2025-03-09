@@ -1,0 +1,20 @@
+name: Enviar Regras para Discord
+
+on:
+  push:
+    paths:
+      - "regras.json"
+
+jobs:
+  send_to_webhook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v3
+
+      - name: Enviar para o webhook do Discord
+        run: |
+          curl -H "Content-Type: application/json" \
+               -X POST \
+               -d @regras.json \
+               "https://discord.com/api/webhooks/1077823147077816381/tBNwDmWjnbfSMG6433Nr_ldUcqf_fCAo3b_XMpAnmnTY6sxYMiqTfR9fw7gJauL62dEk"
